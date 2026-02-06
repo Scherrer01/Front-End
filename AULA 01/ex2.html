@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Gastos Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .result-item {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        
+        .positive {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .limit {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .negative {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Gastos Mensais</h1>
+        
+        <div class="form-group">
+            <label for="salario">Salário:</label>
+            <input type="number" id="salario" placeholder="Digite seu salário">
+        </div>
+        
+        <div class="form-group">
+            <label for="aluguel">Aluguel:</label>
+            <input type="number" id="aluguel" placeholder="Digite o valor do aluguel">
+        </div>
+        
+        <div class="form-group">
+            <label for="alimentacao">Alimentação:</label>
+            <input type="number" id="alimentacao" placeholder="Digite gastos com alimentação">
+        </div>
+        
+        <div class="form-group">
+            <label for="lazer">Lazer:</label>
+            <input type="number" id="lazer" placeholder="Digite gastos com lazer">
+        </div>
+        
+        <button onclick="calcular()">Calcular</button>
+        
+        <div class="result" id="result">
+            <h3>Resultado:</h3>
+            
+            <div class="result-item">
+                <strong>Total de Despesas:</strong>
+                <span id="totalDespesas">R$ 0,00</span>
+            </div>
+            
+            <div class="result-item">
+                <strong>Saldo Restante:</strong>
+                <span id="saldoRestante">R$ 0,00</span>
+            </div>
+            
+            <div class="result-item" id="statusContainer">
+                <strong>Situação:</strong>
+                <span id="status">-</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calcular() {
+            // Pegar valores dos inputs
+            const salario = parseFloat(document.getElementById('salario').value) || 0;
+            const aluguel = parseFloat(document.getElementById('aluguel').value) || 0;
+            const alimentacao = parseFloat(document.getElementById('alimentacao').value) || 0;
+            const lazer = parseFloat(document.getElementById('lazer').value) || 0;
+            
+            // Calcular totais
+            const totalDespesas = aluguel + alimentacao + lazer;
+            const saldoRestante = salario - totalDespesas;
+            
+            // Formatador de moeda
+            function formatarMoeda(valor) {
+                return 'R$ ' + valor.toFixed(2).replace('.', ',');
+            }
+            
+            // Mostrar resultados
+            document.getElementById('totalDespesas').textContent = formatarMoeda(totalDespesas);
+            document.getElementById('saldoRestante').textContent = formatarMoeda(saldoRestante);
+            
+            // Determinar status
+            const statusContainer = document.getElementById('statusContainer');
+            const statusElement = document.getElementById('status');
+            
+            if (saldoRestante > 0) {
+                statusElement.textContent = 'Saldo Positivo';
+                statusContainer.className = 'result-item positive';
+            } else if (saldoRestante === 0) {
+                statusElement.textContent = 'No Limite';
+                statusContainer.className = 'result-item limit';
+            } else {
+                statusElement.textContent = 'Saldo Negativo';
+                statusContainer.className = 'result-item negative';
+            }
+            
+            // Mostrar resultado
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formatador de Nomes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #1976D2;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            display: none;
+        }
+        
+        .result-item {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 4px;
+            border-left: 4px solid #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formatador de Nomes para Agenda</h1>
+        
+        <div class="form-group">
+            <label for="nome">Digite o nome do contato:</label>
+            <input type="text" id="nome" placeholder="Ex: joão silva ">
+        </div>
+        
+        <button onclick="formatarNome()">Formatar Nome</button>
+        
+        <div class="result" id="result">
+            <h3>Resultado:</h3>
+            
+            <div class="result-item">
+                <strong>Nome Original:</strong>
+                <span id="nomeOriginal">-</span>
+            </div>
+            
+            <div class="result-item">
+                <strong>Nome Formatado:</strong>
+                <span id="nomeFormatado">-</span>
+            </div>
+            
+            <div class="result-item">
+                <strong>Quantidade de Palavras:</strong>
+                <span id="qtdPalavras">-</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function limparNomeContato(nome) {
+            // 1. Remover espaços no início e no fim
+            let nomeLimpo = nome.trim();
+            
+            // 2. Transformar em letras maiúsculas
+            nomeLimpo = nomeLimpo.toUpperCase();
+            
+            // Bônus: Contar quantas palavras o nome possui
+            const palavras = nomeLimpo.split(" ");
+            const qtdPalavras = palavras.length;
+            
+            return {
+                nomeFormatado: nomeLimpo,
+                quantidadePalavras: qtdPalavras
+            };
+        }
+        
+        function formatarNome() {
+            // Pegar valor do input
+            const nomeInput = document.getElementById('nome').value;
+            
+            // Chamar a função de formatação
+            const resultado = limparNomeContato(nomeInput);
+            
+            // Mostrar resultados
+            document.getElementById('nomeOriginal').textContent = nomeInput;
+            document.getElementById('nomeFormatado').textContent = resultado.nomeFormatado;
+            document.getElementById('qtdPalavras').textContent = resultado.quantidadePalavras;
+            
+            // Mostrar a área de resultado
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

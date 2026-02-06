@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Turno e Prioridade</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #444;
+            font-weight: 600;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+        
+        .info-text {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .result-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .result-details {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        .result-message {
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .critical {
+            background-color: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #c62828;
+        }
+        
+        .important {
+            background-color: #fff3e0;
+            color: #ef6c00;
+            border-left: 4px solid #ef6c00;
+        }
+        
+        .not-important {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #2e7d32;
+        }
+        
+        .normal {
+            background-color: #e3f2fd;
+            color: #1565c0;
+            border-left: 4px solid #1565c0;
+        }
+        
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #c62828;
+        }
+        
+        .legend {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .legend-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            margin-right: 8px;
+        }
+        
+        .critical-color {
+            background-color: #c62828;
+        }
+        
+        .important-color {
+            background-color: #ef6c00;
+        }
+        
+        .not-important-color {
+            background-color: #2e7d32;
+        }
+        
+        .normal-color {
+            background-color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verificador de Turno e Prioridade</h1>
+        <p class="subtitle">Verifique o status da sua tarefa baseado na hora e prioridade</p>
+        
+        <div class="form-group">
+            <label for="hora">Hora da Tarefa (0-23):</label>
+            <input type="number" id="hora" min="0" max="23" placeholder="Ex: 9 para 9h">
+            <div class="info-text">Turnos: Manhã (0-11), Tarde (12-17), Noite (18-23)</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="prioridade">Nível de Prioridade (1-10):</label>
+            <input type="number" id="prioridade" min="1" max="10" placeholder="Ex: 8 para prioridade alta">
+            <div class="info-text">1 = Baixa prioridade, 10 = Máxima prioridade</div>
+        </div>
+        
+        <button class="btn" onclick="verificarTarefa()">Verificar Status da Tarefa</button>
+        
+        <div class="result" id="resultContainer">
+            <div class="result-title">Resultado da Verificação:</div>
+            <div class="result-details" id="resultDetails"></div>
+            <div class="result-message" id="resultMessage"></div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-title">Legenda:</div>
+            <div class="legend-item">
+                <div class="legend-color critical-color"></div>
+                <span>TAREFA CRÍTICA/URGENTE: Prioridade > 8 e Turno Manhã/Tarde</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color important-color"></div>
+                <span>TAREFA IMPORTANTE: Prioridade 7-8 e Turno Manhã/Tarde</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color normal-color"></div>
+                <span>TAREFA NORMAL: Outras combinações diurnas</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color not-important-color"></div>
+                <span>TAREFA NÃO IMPORTANTE: Qualquer tarefa no turno da Noite</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function verificarTarefa() {
+            // Obter valores dos inputs
+            const horaInput = document.getElementById('hora');
+            const prioridadeInput = document.getElementById('prioridade');
+            const resultContainer = document.getElementById('resultContainer');
+            const resultDetails = document.getElementById('resultDetails');
+            const resultMessage = document.getElementById('resultMessage');
+            
+            const hora = parseInt(horaInput.value);
+            const prioridade = parseInt(prioridadeInput.value);
+            
+            // Resetar resultado anterior
+            resultContainer.style.display = 'block';
+            resultContainer.className = 'result';
+            resultMessage.className = 'result-message';
+            
+            // Validação dos dados de entrada
+            if (isNaN(hora) || hora < 0 || hora > 23) {
+                resultDetails.textContent = `Hora: ${isNaN(hora) ? 'Não informada' : hora}h`;
+                resultMessage.textContent = "Horário Inválido";
+                resultMessage.classList.add('error');
+                return;
+            }
+            
+            if (isNaN(prioridade) || prioridade < 1 || prioridade > 10) {
+                resultDetails.textContent = `Prioridade: ${isNaN(prioridade) ? 'Não informada' : prioridade}`;
+                resultMessage.textContent = "Nível de Prioridade Inválida";
+                resultMessage.classList.add('error');
+                return;
+            }
+            
+            // Determinar o turno
+            let turno;
+            
+            if (hora >= 0 && hora <= 11) {
+                turno = "Manhã";
+            } else if (hora >= 12 && hora <= 17) {
+                turno = "Tarde";
+            } else {
+                turno = "Noite";
+            }
+            
+            // Exibir detalhes
+            resultDetails.textContent = `Hora: ${hora}h | Turno: ${turno} | Prioridade: ${prioridade}`;
+            
+            // Lógica para classificação da tarefa
+            if (turno === "Noite") {
+                resultMessage.textContent = "TAREFA NÃO IMPORTANTE";
+                resultMessage.classList.add('not-important');
+                resultDetails.textContent += " - Esta agenda valoriza as noites para lazer e não para tarefas.";
+            } else if (prioridade > 8 && (turno === "Manhã" || turno === "Tarde")) {
+                resultMessage.textContent = "TAREFA CRÍTICA/URGENTE";
+                resultMessage.classList.add('critical');
+            } else if (prioridade >= 7 && prioridade < 9 && (turno === "Manhã" || turno === "Tarde")) {
+                resultMessage.textContent = "TAREFA IMPORTANTE";
+                resultMessage.classList.add('important');
+            } else {
+                resultMessage.textContent = "TAREFA NORMAL";
+                resultMessage.classList.add('normal');
+            }
+            
+            // Rolar para o resultado
+            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // Permitir enviar com Enter
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                verificarTarefa();
+            }
+        });
+        
+        // Focar no primeiro campo ao carregar a página
+        document.getElementById('hora').focus();
+    </script>
+</body>
+</html>

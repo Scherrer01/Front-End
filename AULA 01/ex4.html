@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Dias para Evento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #9C27B0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #7B1FA2;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            display: none;
+            text-align: center;
+        }
+        
+        .dias {
+            font-size: 24px;
+            font-weight: bold;
+            color: #9C27B0;
+            margin: 10px 0;
+        }
+        
+        .hoje {
+            background-color: #F3E5F5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .evento {
+            background-color: #E1BEE7;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contador de Dias para o Evento</h1>
+        
+        <div class="form-group">
+            <label for="dataEvento">Data do Evento:</label>
+            <input type="date" id="dataEvento">
+        </div>
+        
+        <button onclick="calcularDias()">Calcular Dias</button>
+        
+        <div class="result" id="result">
+            <div class="hoje">
+                <strong>Data de Hoje:</strong><br>
+                <span id="dataHoje">-</span>
+            </div>
+            
+            <div class="evento">
+                <strong>Data do Evento:</strong><br>
+                <span id="dataEventoExibida">-</span>
+            </div>
+            
+            <div class="dias" id="diasRestantes">-</div>
+            
+            <p id="mensagem"></p>
+        </div>
+    </div>
+
+    <script>
+        function calcularDias() {
+            // 1. Criar objetos de data
+            const hoje = new Date(); // Data de hoje
+            const dataEventoInput = document.getElementById('dataEvento').value;
+            
+            // Verificar se uma data foi selecionada
+            if (!dataEventoInput) {
+                alert("Por favor, selecione uma data para o evento!");
+                return;
+            }
+            
+            // Criar objeto Date para o evento
+            const evento = new Date(dataEventoInput);
+            
+            // Formatar datas para exibição
+            const formatarData = (data) => {
+                return data.toLocaleDateString('pt-BR');
+            };
+            
+            // Exibir datas
+            document.getElementById('dataHoje').textContent = formatarData(hoje);
+            document.getElementById('dataEventoExibida').textContent = formatarData(evento);
+            
+            // 2. Calcular diferença em milissegundos
+            const diferencaMs = evento.getTime() - hoje.getTime();
+            
+            // 3. Converter milissegundos para dias
+            const msPorDia = 24 * 60 * 60 * 1000; // 1 dia em milissegundos
+            const dias = diferencaMs / msPorDia;
+            
+            // 4. Arredondar para cima
+            const diasArredondados = Math.ceil(dias);
+            
+            // 5. Exibir resultado
+            let mensagem = "";
+            
+            if (diasArredondados > 0) {
+                mensagem = `Faltam ${diasArredondados} dias para o seu compromisso!`;
+            } else if (diasArredondados === 0) {
+                mensagem = "Seu evento é hoje!";
+            } else {
+                mensagem = `Seu evento já passou há ${Math.abs(diasArredondados)} dias.`;
+            }
+            
+            document.getElementById('diasRestantes').textContent = `${diasArredondados} dias`;
+            document.getElementById('mensagem').textContent = mensagem;
+            
+            // Mostrar resultado no console também
+            console.log(mensagem);
+            
+            // Mostrar a área de resultado
+            document.getElementById('result').style.display = 'block';
+        }
+        
+        // Configurar data mínima como hoje
+        window.onload = function() {
+            const hoje = new Date();
+            const dataInput = document.getElementById('dataEvento');
+            
+            // Formatar data no formato YYYY-MM-DD
+            const ano = hoje.getFullYear();
+            const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+            const dia = String(hoje.getDate()).padStart(2, '0');
+            
+            dataInput.min = `${ano}-${mes}-${dia}`;
+            
+            // Definir data padrão como 7 dias a partir de hoje
+            const dataPadrao = new Date(hoje);
+            dataPadrao.setDate(hoje.getDate() + 7);
+            
+            const anoPadrao = dataPadrao.getFullYear();
+            const mesPadrao = String(dataPadrao.getMonth() + 1).padStart(2, '0');
+            const diaPadrao = String(dataPadrao.getDate()).padStart(2, '0');
+            
+            dataInput.value = `${anoPadrao}-${mesPadrao}-${diaPadrao}`;
+        };
+    </script>
+</body>
+</html>
