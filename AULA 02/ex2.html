@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Cartão de Visitas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador de Cartão de Visitas</h1>
+        
+        <div class="gerador">
+            <!-- Formulário de entrada -->
+            <div class="formulario">
+                <h2>Personalize seu cartão</h2>
+                
+                <div class="campo">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" placeholder="Digite seu nome" oninput="atualizarCartao()">
+                </div>
+                
+                <div class="campo">
+                    <label for="cargo">Cargo:</label>
+                    <input type="text" id="cargo" placeholder="Digite seu cargo" oninput="atualizarCartao()">
+                </div>
+                
+                <div class="campo">
+                    <label for="cor">Cor do cartão:</label>
+                    <select id="cor" onchange="atualizarCartao()">
+                        <option value="#3498db">Azul</option>
+                        <option value="#e74c3c">Vermelho</option>
+                        <option value="#2ecc71">Verde</option>
+                        <option value="#f39c12">Laranja</option>
+                        <option value="#9b59b6">Roxo</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Cartão de visitas (live preview) -->
+            <div class="preview">
+                <h2>Pré-visualização</h2>
+                <div class="cartao" id="cartao" style="--cor-cartao: #3498db;">
+                    <div class="cartao-conteudo">
+                        <div class="cartao-nome" id="cartao-nome">Seu Nome</div>
+                        <div class="cartao-cargo" id="cartao-cargo">Seu Cargo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function atualizarCartao() {
+    // Obtém os valores dos campos
+    const nome = document.getElementById('nome').value;
+    const cargo = document.getElementById('cargo').value;
+    const corSelect = document.getElementById('cor');
+    
+    // Obtém os elementos do cartão
+    const cartaoNome = document.getElementById('cartao-nome');
+    const cartaoCargo = document.getElementById('cartao-cargo');
+    const cartao = document.getElementById('cartao');
+    
+    // Atualiza o nome (se vazio, mostra placeholder)
+    cartaoNome.innerText = nome.trim() || 'Seu Nome';
+    
+    // Atualiza o cargo (se vazio, mostra placeholder)
+    cartaoCargo.innerText = cargo.trim() || 'Seu Cargo';
+    
+    // Aplica a cor selecionada
+    cartao.style.setProperty('--cor-cartao', corSelect.value);
+}
+
+// Inicializa o cartão com valores padrão
+document.addEventListener('DOMContentLoaded', function() {
+    atualizarCartao();
+    
+    // Adiciona event listeners para atualização em tempo real
+    document.getElementById('nome').addEventListener('input', atualizarCartao);
+    document.getElementById('cargo').addEventListener('input', atualizarCartao);
+    document.getElementById('cor').addEventListener('change', atualizarCartao);
+});
+    </script>
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: lightgray;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gerador {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* Estilo do formulário */
+.formulario {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.formulario h2 {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.campo {
+    margin-bottom: 20px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+    font-weight: 600;
+}
+
+.campo input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.campo input[type="text"]:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.campo select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: white;
+    cursor: pointer;
+}
+
+.campo select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* Estilo do preview */
+.preview {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.preview h2 {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+/* Estilo do cartão */
+.cartao {
+    width: 100%;
+    height: 300px;
+    background-color: var(--cor-cartao);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de brilho no cartão */
+.cartao::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 50%
+    );
+    transform: rotate(30deg);
+    pointer-events: none;
+}
+
+.cartao-conteudo {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    width: 100%;
+}
+
+.cartao-nome {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    word-wrap: break-word;
+}
+
+.cartao-cargo {
+    font-size: 1.2em;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    word-wrap: break-word;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .gerador {
+        grid-template-columns: 1fr;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    .cartao {
+        height: 250px;
+    }
+    
+    .cartao-nome {
+        font-size: 1.5em;
+    }
+    
+    .cartao-cargo {
+        font-size: 1em;
+    }
+}
+
+/* Animação de hover no cartão */
+.cartao:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+    </style>
+</body>
+</html>
