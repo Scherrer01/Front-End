@@ -20,10 +20,12 @@ body {
     height: 180px;
     width: 700px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;  
     align-items: center;
     background-color: burlywood;
     border: 2px solid black;
+    padding: 0;  
+    box-sizing: border-box;
 }
 
 .nome3 {
@@ -39,5 +41,4 @@ body {
     width: 90px;
     background-color: coral;
     border: 2px solid black;
-    margin: 0 40px;  
 }
