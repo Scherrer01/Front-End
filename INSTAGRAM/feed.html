@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Web - Craques</title>
+    <link rel="stylesheet" href="feed.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- BARRA LATERAL ESQUERDA (FIXA) -->
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+        </div>
+        
+        <div class="menu">
+            <div class="menu-item active">
+                <i class="fas fa-home"></i>
+                <span>Página inicial</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-search"></i>
+                <span>Pesquisa</span>
+            </div>
+            <div class="menu-item">
+                <i class="far fa-compass"></i>
+                <span>Explorar</span>
+            </div>
+            <div class="menu-item">
+                <i class="far fa-clapperboard"></i>
+                <span>Reels</span>
+            </div>
+            <div class="menu-item">
+                <i class="far fa-paper-plane"></i>
+                <span>Mensagens</span>
+            </div>
+            <div class="menu-item">
+                <i class="far fa-heart"></i>
+                <span>Notificações</span>
+            </div>
+            <div class="menu-item">
+                <i class="far fa-plus-square"></i>
+                <span>Criar</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-user-circle"></i>
+                <span>Perfil</span>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="menu-item">
+                <i class="fas fa-bars"></i>
+                <span>Mais</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="main-content">
+        <!-- HISTÓRIAS -->
+        <div class="stories-wrapper">
+            <div class="stories">
+                <div class="story">
+                    <div class="story-ring">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Fabricio">
+                    </div>
+                    <span>Fabricio</span>
+                </div>
+                <div class="story">
+                    <div class="story-ring">
+                        <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Messi">
+                    </div>
+                    <span>José</span>
+                </div>
+                <div class="story">
+                    <div class="story-ring">
+                        <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="CR7">
+                    </div>
+                    <span>Pedro</span>
+                </div>
+                <div class="story">
+                    <div class="story-ring">
+                        <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="Gabriel">
+                    </div>
+                    <span>Gabrieldobronx</span>
+                </div>
+                <div class="story">
+                    <div class="story-ring">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Amanda">
+                    </div>
+                    <span>Amanda</span>
+                </div>
+                <div class="story">
+                    <div class="story-ring">
+                        <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Vini Jr">
+                    </div>
+                    <span>Augusto</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEED -->
+        <div class="feed">
+            <!-- POST 1 - Fabricio -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Fabricio" class="post-avatar">
+                        <div class="post-user-info">
+                            <span class="post-username">Fabricio</span>
+                            <span class="post-location">Paris, França</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+
+                <div class="post-image">
+                    <img src="https://picsum.photos/600/600?random=1" alt="Post Fabricio">
+                </div>
+
+                <div class="post-actions">
+                    <div class="left-actions">
+                        <i class="far fa-heart"></i>
+                        <i class="far fa-comment"></i>
+                        <i class="far fa-paper-plane"></i>
+                    </div>
+                    <i class="far fa-bookmark"></i>
+                </div>
+
+                <div class="post-likes">
+                    <span><strong>4.567.890 curtidas</strong></span>
+                </div>
+
+                <div class="post-caption">
+                    <span class="caption-username">Fabricio</span>
+                    <span class="caption-text">Foco e fé! 🙏🏽 Preparação para mais um desafio. Obrigado pelo carinho de sempre! 🔥🇧🇷 #Fabricio #Futebol</span>
+                </div>
+
+                <div class="post-comments">
+                    <span class="view-comments">Ver todos os 12.345 comentários</span>
+                    <div class="comment">
+                        <span class="comment-username">bruna_marquezine</span>
+                        <span class="comment-text">❤️</span>
+                    </div>
+                    <div class="comment">
+                        <span class="comment-username">danielalbinati</span>
+                        <span class="comment-text">Boa sorte, craque!</span>
+                    </div>
+                </div>
+
+                <div class="post-time">Há 2 horas</div>
+            </div>
+
+            <!-- POST 2 - MESSI -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Messi" class="post-avatar">
+                        <div class="post-user-info">
+                            <span class="post-username">José</span>
+                            <span class="post-location">Miami, EUA</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+
+                <div class="post-image">
+                    <img src="https://picsum.photos/600/600?random=2" alt="Post Messi">
+                </div>
+
+                <div class="post-actions">
+                    <div class="left-actions">
+                        <i class="far fa-heart"></i>
+                        <i class="far fa-comment"></i>
+                        <i class="far fa-paper-plane"></i>
+                    </div>
+                    <i class="far fa-bookmark"></i>
+                </div>
+
+                <div class="post-likes">
+                    <span><strong>8.234.567 curtidas</strong></span>
+                </div>
+
+                <div class="post-caption">
+                    <span class="caption-username">José</span>
+                    <span class="caption-text">Muy feliz por el gol y la victoria! Seguimos trabajando 💪🏼🇦🇷 #InterMiami #Messi #Family</span>
+                </div>
+
+                <div class="post-comments">
+                    <span class="view-comments">Ver todos os 23.456 comentários</span>
+                    <div class="comment">
+                        <span class="comment-username">antonelaroccuzzo</span>
+                        <span class="comment-text">Te amo! 🏼</span>
+                    </div>
+                    <div class="comment">
+                        <span class="comment-username">luisasuarez</span>
+                        <span class="comment-text">Grande Leo!</span>
+                    </div>
+                </div>
+
+                <div class="post-time">Há 5 horas</div>
+            </div>
+
+            <!-- POST 3 - Pedro RONALDO -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="CR7" class="post-avatar">
+                        <div class="post-user-info">
+                            <span class="post-username">Pedro</span>
+                            <span class="post-location">Riad, Arábia Saudita</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+
+                <div class="post-image">
+                    <img src="https://picsum.photos/600/600?random=3" alt="Post CR7">
+                </div>
+
+                <div class="post-actions">
+                    <div class="left-actions">
+                        <i class="far fa-heart"></i>
+                        <i class="far fa-comment"></i>
+                        <i class="far fa-paper-plane"></i>
+                    </div>
+                    <i class="far fa-bookmark"></i>
+                </div>
+
+                <div class="post-likes">
+                    <span><strong>12.345.678 curtidas</strong></span>
+                </div>
+
+                <div class="post-caption">
+                    <span class="caption-username">Pedro</span>
+                    <span class="caption-text">Hard work pays off! 🦁💪🏼 Sempre acreditando no time. Vamos por mais! #CR7 #AlNassr #Siuuuu</span>
+                </div>
+
+                <div class="post-comments">
+                    <span class="view-comments">Ver todos os 45.678 comentários</span>
+                    <div class="comment">
+                        <span class="comment-username">georginagio</span>
+                        <span class="comment-text">My champion! ❤️</span>
+                    </div>
+                    <div class="comment">
+                        <span class="comment-username">pepe_official</span>
+                        <span class="comment-text">💪🏼💪🏼</span>
+                    </div>
+                </div>
+
+                <div class="post-time">Há 8 horas</div>
+            </div>
+
+            <!-- POST 4 - Gabriel DO BRONX -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="Gabriel" class="post-avatar">
+                        <div class="post-user-info">
+                            <span class="post-username">Gabrieldobronx</span>
+                            <span class="post-location">São Paulo, Brasil</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+
+                <div class="post-image">
+                    <img src="https://picsum.photos/600/600?random=4" alt="Post Gabriel">
+                </div>
+
+                <div class="post-actions">
+                    <div class="left-actions">
+                        <i class="far fa-heart"></i>
+                        <i class="far fa-comment"></i>
+                        <i class="far fa-paper-plane"></i>
+                    </div>
+                    <i class="far fa-bookmark"></i>
+                </div>
+
+                <div class="post-likes">
+                    <span><strong>3.456.789 curtidas</strong></span>
+                </div>
+
+                <div class="post-caption">
+                    <span class="caption-username">Gabrieldobronx</span>
+                    <span class="caption-text">O campeão voltou! 🦁🇧🇷 Treino pesado pra buscar mais um cinturão. Vamos por tudo! #UFC #GabrielDoBronx #Champion</span>
+                </div>
+
+                <div class="post-comments">
+                    <span class="view-comments">Ver todos os 8.901 comentários</span>
+                    <div class="comment">
+                        <span class="comment-username">deivesonfigueiredo</span>
+                        <span class="comment-text">Vai pra cima!</span>
+                    </div>
+                    <div class="comment">
+                        <span class="comment-username">juniorcigano</span>
+                        <span class="comment-text">Monstro!</span>
+                    </div>
+                </div>
+
+                <div class="post-time">Há 12 horas</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BARRA LATERAL DIREITA -->
+    <div class="right-sidebar">
+        <!-- PERFIL DO USUÁRIO LOGADO -->
+        <div class="current-user">
+            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Seu perfil">
+            <div class="user-info">
+                <span class="username">Khabib Nurmagomedov</span>
+                <span class="name">Meu Perfil</span>
+            </div>
+            <span class="switch">Mudar</span>
+        </div>
+
+        <!-- SUGESTÕES -->
+        <div class="suggestions">
+            <div class="suggestions-header">
+                <span class="suggestions-title">Sugestões para você</span>
+                <span class="see-all">Ver tudo</span>
+            </div>
+
+            <div class="suggestion">
+                <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Vini Jr">
+                <div class="suggestion-info">
+                    <span class="suggestion-username">Augusto</span>
+                    <span class="suggestion-meta">Seguido por Fabricio</span>
+                </div>
+                <button class="follow-btn">Seguir</button>
+            </div>
+
+            <div class="suggestion">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Amanda">
+                <div class="suggestion-info">
+                    <span class="suggestion-username">Amanda</span>
+                    <span class="suggestion-meta">Seguido por Pedro</span>
+                </div>
+                <button class="follow-btn">Seguir</button>
+            </div>
+
+            <div class="suggestion">
+                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Popó">
+                <div class="suggestion-info">
+                    <span class="suggestion-username">popo_oficial</span>
+                    <span class="suggestion-meta">Seguido por Gabrieldobronx</span>
+                </div>
+                <button class="follow-btn">Seguir</button>
+            </div>
+
+            <div class="suggestion">
+                <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Luísa">
+                <div class="suggestion-info">
+                    <span class="suggestion-username">luisasonza</span>
+                    <span class="suggestion-meta">Nova no Instagram</span>
+                </div>
+                <button class="follow-btn">Seguir</button>
+            </div>
+
+            <div class="suggestion">
+                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Rodrigo">
+                <div class="suggestion-info">
+                    <span class="suggestion-username">rodrigogoes</span>
+                    <span class="suggestion-meta">Seguido por messi</span>
+                </div>
+                <button class="follow-btn">Seguir</button>
+            </div>
+        </div>
+
+        <!-- RODAPÉ DIREITO -->
+        <div class="right-footer">
+            <div class="footer-links">
+                <a href="#">Sobre</a>
+                <a href="#">Ajuda</a>
+                <a href="#">Imprensa</a>
+                <a href="#">API</a>
+                <a href="#">Carreiras</a>
+                <a href="#">Privacidade</a>
+                <a href="#">Termos</a>
+                <a href="#">Localizações</a>
+                <a href="#">Idioma</a>
+                <a href="#">Meta Verified</a>
+            </div>
+            <div class="copyright">
+                <span>© 2026 INSTAGRAM FROM META</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
